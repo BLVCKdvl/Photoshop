@@ -1,69 +1,44 @@
-﻿namespace MyPhotoshop
+﻿using System;
+
+namespace MyPhotoshop
 {
     public class Pixel
     {
-        public double R;
-        public double r
+        public double Check(double value)
         {
-            get
-            {
-                return R;
-            }
+            if (value < 0 || value > 1)
+                throw new ArgumentException();
+            return value;
+        }
+
+        public static double Trim(double value) => (value < 0) ? 0 : (value > 1) ? 1 : value;
+
+        private double r;
+        public double R
+        {
+            get { return r; }
             set
             {
-                if (value < 0)
-                {
-                    R = 0;
-                }
-                if(value > 0) 
-                {
-                    R = 1;
-                }
-
-                R = value;
+                r = Check(value);
             }
         }
 
-        public double G;
-        public double g
+        private double g;
+        public double G
         {
-            get
-            {
-                return G;
-            }
+            get { return g; }
             set
             {
-                if (value < 0)
-                {
-                    G = 0;
-                }
-                if (value > 0)
-                {
-                    G = 1;
-                }
-
-                G = value;
+                g = Check(value);
             }
         }
-        public double B;
-        public double b
+        private double b;
+        public double B
         {
-            get
-            {
-                return B;
-            }
+            get { return b; }
             set
             {
-                if (value < 0)
-                {
-                    B = 0;
-                }
-                if (value > 0)
-                {
-                    B = 1;
-                }
-
-                B = value;
+                b = Check(value);
             }
         }
     }
