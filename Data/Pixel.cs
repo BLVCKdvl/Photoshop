@@ -1,4 +1,6 @@
 ﻿using System;
+using System.CodeDom;
+using System.Diagnostics;
 
 namespace MyPhotoshop
 {
@@ -6,9 +8,10 @@ namespace MyPhotoshop
     {
         public Pixel(double r, double g, double b)
         {
-            this.r = r;
-            this.g = g;
-            this.b = b;
+            this.r = this.g = this.b = 0;
+            this.R = r;
+            this.G = g;
+            this.B = b;
         }
 
         public double Check(double value)
@@ -19,6 +22,19 @@ namespace MyPhotoshop
         }
 
         public static double Trim(double value) => (value < 0) ? 0 : (value > 1) ? 1 : value;
+
+        public static Pixel operator* (Pixel p, double c)
+        {
+            return new Pixel(
+                Pixel.Trim(p.R * c),
+                Pixel.Trim(p.G * c),
+                Pixel.Trim(p.B * c));
+        }
+
+        public static Pixel operator* (double c, Pixel p)
+        {
+            return p * c;
+        }
 
         private double r;
         public double R
