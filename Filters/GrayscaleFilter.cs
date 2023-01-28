@@ -6,10 +6,7 @@ namespace MyPhotoshop
     {
         public ParameterInfo[] GetParameters()
         {
-            return new[]
-            {
-                new ParameterInfo { Name="Коэффициент", MaxValue=0, MinValue=0, Increment=0.1, DefaultValue=1 }
-            };
+            return new ParameterInfo[0];
         }
 
         public override string ToString()
@@ -25,12 +22,8 @@ namespace MyPhotoshop
             {
                 for (int y = 0; y < result.height; y++)
                 {
-                    result[x, y] = new Pixel
-                    {
-                        R = original[x, y].R,
-                        G = original[x, y].R,
-                        B = original[x, y].R
-                    };
+                    var lightness = original[x, y].R * 0.2126 + original[x, y].G * 0.7152 + original[x, y].B * 0.0722;
+                    result[x, y] = new Pixel(lightness, lightness, lightness);
                 }
             }
 
