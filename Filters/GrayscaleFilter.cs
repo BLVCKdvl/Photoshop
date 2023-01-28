@@ -22,12 +22,17 @@ namespace MyPhotoshop
             {
                 for (int y = 0; y < result.height; y++)
                 {
-                    var lightness = original[x, y].R * 0.2126 + original[x, y].G * 0.7152 + original[x, y].B * 0.0722;
-                    result[x, y] = new Pixel(lightness, lightness, lightness);
+                    result[x, y] = ProcessPixel(original[x, y], parameters);
                 }
             }
 
             return result;
+        }
+
+        public Pixel ProcessPixel (Pixel original, double[] parameters)
+        {
+            var lightness = original.R * 0.2126 + original.G * 0.7152 + original.B * 0.0722;
+            return new Pixel(lightness, lightness, lightness);
         }
     }
 }
