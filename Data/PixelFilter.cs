@@ -2,13 +2,12 @@
 
 namespace MyPhotoshop
 {
-    public abstract class PixelFilter : IFilter
+    public abstract class PixelFilter : ParametrizedFilter
     {
-        public abstract ParameterInfo[] GetParameters();
+        public PixelFilter(IParameters parameters) : base(parameters) { }
+        public abstract Pixel ProcessPixel(Pixel pixel, IParameters parameters);
 
-        public abstract Pixel ProcessPixel(Pixel pixel, double[] parameters);
-
-        public Photo Process(Photo original, double[] parameters)
+        public override Photo Process(Photo original, IParameters parameters)
         {
             var result = new Photo(original.width, original.height);
 
